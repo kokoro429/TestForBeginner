@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class InputValidator {
 
   //数字の入力とチェック
-  public static double getValidatedDouble(Scanner scanner) {//複数箇所で使用するときにインスタンス生成せずに呼び出せるように＆インスタンスの状態に依存しないためstaticを使用。
+  public static double getValidatedDouble(
+      Scanner scanner) {//複数箇所で使用するときにインスタンス生成せずに呼び出せるように＆インスタンスの状態に依存しないためstaticを使用。
     double num = 0;
     boolean valid = false;
 
@@ -39,11 +40,11 @@ public class InputValidator {
         }
       } catch (IllegalArgumentException e) {//IllegalArgumentException用のcatch。
         System.out.println(e.getMessage());
-      } catch (Exception e){//その他のエラー
+      } catch (Exception e) {//その他のエラー
         System.out.println("エラーが発生しました。再入力してください。");
         scanner.next();//無効な入力を消費
       }
     }
-    return  operator;
+    return operator;
   }
 }
