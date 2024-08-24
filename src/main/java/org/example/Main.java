@@ -1,70 +1,128 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 //TIP コードを<b>実行</b>するには、<shortcut actionId="Run"/> を押すか
 // ガターの <icon src="AllIcons.Actions.Execute"/> アイコンをクリックします。
-public class Main {
-
-  public static void main(String[] args) {
-    /*
-    Javaの基本構文を使用して、簡単な計算機プログラムを作成してください。
-    加減乗除の四則演算ができ、ユーザーから入力を受け取り、結果を表示するものとします。
+/*
+    配列とリストまたはStreamAPIを使用して、学生の名前と点数を管理するプログラムを作成してください。
+    名前の追加、削除、点数の更新、平均点の計算ができるようにしてください。
+    処理をループさせるにはWhile文を使って実現してください。
 
 
     入力例:
-    1番目の数字を入力してください: 10
-    演算子を入力してください (+, -, *, /): +
-        2番目の数字を入力してください: 5
+    1. 学生を追加
+    2. 学生を削除
+    3. 点数を更新
+    4. 平均点を計算
+    5. 全学生の情報を表示
+    6. 終了
+    選択してください: 1
 
-    期待される出力例:
-    計算結果: 10 + 5 = 15
+    学生の名前を入力してください: 山田太郎
+    山田太郎の点数を入力してください: 85
+
+    1. 学生を追加
+    2. 学生を削除
+    3. 点数を更新
+    4. 平均点を計算
+    5. 全学生の情報を表示
+    6. 終了
+    選択してください: 1
+
+    学生の名前を入力してください: 鈴木花子
+    鈴木花子の点数を入力してください: 92
+
+期待される出力例:
+    1. 学生を追加
+    2. 学生を削除
+    3. 点数を更新
+    4. 平均点を計算
+    5. 全学生の情報を表示
+    6. 終了
+    選択してください: 5
+
+    学生一覧:
+    山田太郎: 85点
+    鈴木花子: 92点
+
+    1. 学生を追加
+    2. 学生を削除
+    3. 点数を更新
+    4. 平均点を計算
+    5. 全学生の情報を表示
+    6. 終了
+    選択してください: 4
+
+    平均点: 88.5点
+
+    1. 学生を追加
+    2. 学生を削除
+    3. 点数を更新
+    4. 平均点を計算
+    5. 全学生の情報を表示
+    6. 終了
+    選択してください: 6
+
+    プログラムを終了します。
 
      */
 
+
+public class Main {
+
+  public static void main(String[] args) {
+
     Scanner scanner = new Scanner(System.in);
+    StudentManagement studentManagement = new StudentManagement();
 
-    //num1の入力＆検証
-    double num1 = InputValidator.getValidatedDouble(scanner);
+    while (true) {
+      //表示
+      System.out.println("1. 学生を追加");
+      System.out.println("2. 学生を削除");
+      System.out.println("3. 点数を更新");
+      System.out.println("4. 平均点を計算");
+      System.out.println("5. 全学生の情報を表示");
+      System.out.println("6. 終了");
+      System.out.println("選択してください:");
+      //ユーザーが選んだ番号を受け取る
+      int choice = scanner.nextInt();
+      //Enterキーを消費
+      scanner.nextLine();
 
-    //演算子の入力＆検証
-    char operator = InputValidator.getValidatedOperator(scanner);
+      // 入力に応じて処理
+      switch (choice) {
+        case 1:
+          studentManagement.addStudent();
+          break;
 
-    //num2の入力＆検証
-    double num2 = InputValidator.getValidatedDouble(scanner);
+        case 2:
+          studentManagement.deleteStudent();
+          break;
 
-    double result = 0;
+        case 3:
+          studentManagement.updateStudentScore();
+          break;
 
-    //演算子に応じて実行
-    switch (operator) {
-      case '+':
-        result = num1 + num2;
-        break;
+        case 4:
+          studentManagement.averageScore();
+          break;
 
-      case '-':
-        result = num1 - num2;
-        break;
+        case 5:
+          studentManagement.displayAllStudents();
+          break;
 
-      case '*':
-        result = num1 * num2;
-        break;
-
-      case '/':
-        if (num2 != 0) {
-          result = num1 / num2;
-        } else {
-          System.out.println("０で割ることは出来ません。");
+        case 6:
+          System.out.println("プログラムを終了します。");
+          scanner.close();
+          ;
           return;
-        }
-        break;
-
-      default:
-        System.out.println("無効な演算子です。");
-        return;
+        default:
+          System.out.println("無効な選択です。");
+          return;
+      }
     }
-
-    //結果
-    System.out.println("計算結果：" + result);
-
   }
 }
